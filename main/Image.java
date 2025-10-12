@@ -36,52 +36,39 @@ class Main {
 }
 
 
+
 public class Image implements Displayable {
-    private int width;
-    private int height;
-    private Color[][] pixels;
+    private final BufferedImage bufferedImage;
+    private final int width;
+    private final int height;
 
     public Image(int width, int height) {
         this.width = width;
         this.height = height;
-        pixels = new Color[width][height];
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                pixels[x][y] = Color.BLACK;
+        bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                bufferedImage.setRGB(x, y, new Color(0, 0, 0, 255).getRGB());
             }
         }
     }
 
     public void display(int x, int y, Color color) {
         if (x >= 0 && x < width && y >= 0 && y < height) {
-            pixels[x][y] = color;
+            bufferedImage.setRGB(x, y, color.getRGB());
         }
     }
 
-
     public void save(String filename) {
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                if (x >= 0 && x < width && y >= 0 && y < height) {
-                    Color color = pixels[x][y];
-                    if (color == null) color = Color.WHITE;
-                    image.setRGB(x, y, color.getRGB());
-                }
-            }
-        }
-
         try {
-            File outputFile = new File(filename);
-            ImageIO.write(image, "png", outputFile);
-            System.out.println("Image saved as " + filename);
+            File file = new File(filename);
+            ImageIO.write(bufferedImage, "png", file);
+            System.out.println("Image saved as: " + filename);
         } catch (IOException e) {
             System.err.println("Failed to save image: " + e.getMessage());
         }
     }
-
-
 
     public int getWidth() {
         return width;
