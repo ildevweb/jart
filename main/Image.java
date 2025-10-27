@@ -18,10 +18,10 @@ class Main {
         Triangle triangle = new Triangle(new Point(500, 500), new Point(250, 700), new Point(700, 800));
         triangle.draw(image);
 
-        /*for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 50; i++) {
             Circle circle = Circle.random(image.getWidth(), image.getHeight());
             circle.draw(image);
-        }*/
+        }
         image.save("image.png");
     }
 }
@@ -60,13 +60,6 @@ public class Image implements Displayable {
             System.err.println("Failed to save image: " + e.getMessage());
         }
     }
-
-    /*public void draw_line(Point a, Point b, Color color) {
-        Graphics2D g2d = bufferedImage.createGraphics();
-
-        g2d.setColor(color);
-        g2d.drawLine(a.x, a.y, b.x, b.y);
-    }*/
 
     public int getWidth() {
         return width;
