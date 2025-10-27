@@ -2,7 +2,6 @@ package main;
 
 import shapes.*;
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -62,12 +61,12 @@ public class Image implements Displayable {
         }
     }
 
-    public void draw_line(Point a, Point b, Color color) {
+    /*public void draw_line(Point a, Point b, Color color) {
         Graphics2D g2d = bufferedImage.createGraphics();
 
         g2d.setColor(color);
         g2d.drawLine(a.x, a.y, b.x, b.y);
-    }
+    }*/
 
     public int getWidth() {
         return width;

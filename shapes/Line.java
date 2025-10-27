@@ -1,6 +1,6 @@
 package shapes;
 
-import main.Image;
+import main.Displayable;
 import java.awt.Color;
 
 public class Line {
@@ -13,8 +13,22 @@ public class Line {
     }
 
     
-    public void draw(Image image, Color color) {
+    public void draw(Displayable image, Color color) {
+        int dx = pointB.x - pointA.x;
+        int dy = pointB.y - pointA.y;
 
-        image.draw_line(pointA, pointB, color);
+        int steps = Math.abs(dx) > Math.abs(dy) ? Math.abs(dx) : Math.abs(dy);
+
+        double xInc = (double) dx / (double) steps;
+        double yInc = (double) dy / (double) steps;
+
+        double x = pointA.x;
+        double y = pointA.y;
+
+        for (int i = 0; i <= steps; i++) {
+            image.display((int) Math.round(x), (int) Math.round(y), color);
+            x += xInc;
+            y += yInc;
+        }
     }
 }
